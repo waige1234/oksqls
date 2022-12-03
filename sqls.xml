@@ -5,12 +5,12 @@
 <sqls>
     <sql id="1"
          dbdriver="com.mysql.cj.jdbc.Driver"
-         url="jdbc:mysql://47.101.198.40:3306/水云书斋.db"
-         name="root"
-         password="!a511657337"/>
+         url="jdbc:mysql://0.0.0.0:3306/数据库名"
+         name="用户名"
+         password="密码"/>
     <sql id="2"
          dbdriver="com.mysql.cj.jdbc.Driver"
-         url="jdbc:mysql://47.101.198.40:3306/考级明细"
-         name="root"
-         password="!a511657337"/>
+         url="jdbc:mysql://0.0.0.0:3306/数据库名"
+         name="用户名"
+         password="密码"/>
 </sqls>
