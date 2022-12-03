@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE sqls>
+
+
+<sqls>
+    <sql id="1"
+         dbdriver="com.mysql.cj.jdbc.Driver"
+         url="jdbc:mysql://47.101.198.40:3306/水云书斋.db"
+         name="root"
+         password="!a511657337"/>
+    <sql id="2"
+         dbdriver="com.mysql.cj.jdbc.Driver"
+         url="jdbc:mysql://47.101.198.40:3306/考级明细"
+         name="root"
+         password="!a511657337"/>
+</sqls>
