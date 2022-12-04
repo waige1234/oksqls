@@ -18,10 +18,13 @@ url当然是填写您自己的数据库url，mysql的端口一般是3306当然�
 三.更改全局变量（这个不一定要改）
 1.首先更改SQLID这个全局变量，因为是全局变量在什么地方都可以改，如果是kotlin的项目，随便找个地方SQLID=“你自己的id，注意是string类型的”
 如果是java项目的话就SQL_setsqlcontextKt.setSQLID("你自己的id");
+
 2.ANDorOR，这个参数也有默认值，一般不改的话是“and”，要么改的话也就只能改成“or”，用于拼接sql语句的时候where xxx=xxx and xxx=xxx，如果ANDorOR的值为“or”
 那这个sql语句救会变成where xxx=xxx or xxx=xxx。kotlin项目就直接改就行，java项目的话JC_SQLEXEKt.setANDorOR("");
+
 3.LIKEorEQUIRorIS这个参数默认值是“=”，和上一个参数一样用于sql语句拼接，可以改成“is”或“like”，用于拼接sql语句的时候where xxx=xxx and xxx=xxx，
 如果LIKEorEQUIRorIS的值为“is”或“like”，那这个sql语句救会变成where xxx is xxx and xxx is xxx或where xxx like xxx 
+
 
 三.方法执行的参数。比如查询条件，查询内容和到底要查什么
 
@@ -32,4 +35,10 @@ url当然是填写您自己的数据库url，mysql的端口一般是3306当然�
 kotlin的话可以直接EXE_tiaojian[索引值]=“xxx”，但如果是java就得先定义两个长度为20的string数组，然后先将条件和内容分别赋值进去然后
 JC_SQLEXEKt.setEXE_neirong(内容数组的数组名);JC_SQLEXEKt.setEXE_tiaojian(条件数组的数组名名);
 
-2.
+2.JS_zhi[]这个参数只有在做查询操作的时候用的到，他用来记录你要查的字段，用法和上面两个参数一样，如果是进行查询操作，这个不能不写，如果不是查询操作的
+话就无所谓，kotlin用法JS_zhi[0]="xxx",java用法JC_SQLEXEKt.JS_zhi(条件数组的数组名名);
+
+四.调用方法进行sql操作
+1.查询方法
+（1）kotlin的写法chasql.cha("要查询的表名")，java的写法chasql.INSTANCE.cha("");
+此查询方法会将第三步用到的参数拼接进入sql语句中进行查询，查询结果存入josnarray
