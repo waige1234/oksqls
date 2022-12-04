@@ -4,7 +4,10 @@ oksql项目可以进行sql语句的拼接，可以做到不写sql语句进行sql
 编写该库主要为了方便sql查询，底层采用jdbc，第一次编写工具库，由衷的希望各位大佬提出意见和修改方案，不甚感激
 
 首次使用oksql首先将oksql的jar包和sqls.xml下载下来，可以直接依赖oksql：1.0.0，这个目前只能手动添加依赖，在依赖好后创建资源文件夹resource将其标记为资源文件后将sqls.xml复制进去
+
 在将oksql添加入库之后，先在项目结构/工件/把你当前的项目工件建立好然后，双击右侧的oksql：1.0.0，点击确定，不这样的话运行时会报错
+
+不需要额外依赖josnarry相关的依赖，有内置的已经依赖好的
 
 一.更改sqls.xml
 我这里默认用的是mysql，java的jdbc技术应该可以换数据库的，这个需要改dbdriver那一栏，当然如果本来就用mysql的同志就不用改了
@@ -40,5 +43,8 @@ JC_SQLEXEKt.setEXE_neirong(内容数组的数组名);JC_SQLEXEKt.setEXE_tiaojian
 
 四.调用方法进行sql操作
 1.查询方法
-（1）kotlin的写法chasql.cha("要查询的表名")，java的写法chasql.INSTANCE.cha("");
-此查询方法会将第三步用到的参数拼接进入sql语句中进行查询，查询结果存入josnarray
+（1）kotlin的写法chasql.cha("要查询的表名")，java的写法chasql.INSTANCE.cha("要查询的表名");这个方法有返回值，是jsonArray
+此查询方法会将第三步用到的参数拼接进入sql语句中进行查询，查询结果存入josnarray，想要调出来的话kotlin是chasql.JsonArray，java是chasql.INSTANCE.getJsonArray()
+
+（2）kotlin的写法chasql.ChaOne("要查询的表名"),java是chasql.INSTANCE.ChaOne("要查询的表名");这个方法没有返回值
+此查询方法针对的是只需要查出一行数据的需求，默认查询结果输出为string数组jieguo[]
