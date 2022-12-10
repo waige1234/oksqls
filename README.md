@@ -47,7 +47,8 @@ JC_SQLEXEKt.setEXE_neirong(内容数组的数组名);JC_SQLEXEKt.setEXE_tiaojian
 此查询方法会将第三步用到的参数拼接进入sql语句中进行查询，查询结果存入josnarray，想要调出来的话kotlin是chasql.JsonArray，java是chasql.INSTANCE.getJsonArray()
 
 （2）kotlin的写法chasql.ChaOne("要查询的表名"),java是chasql.INSTANCE.ChaOne("要查询的表名");这个方法没有返回值
-此查询方法针对的是只需要查出一行数据的需求，默认查询结果输出为string数组jieguo[]，调出查询结果时只需要chasql.jieguo[xxx]正常调出数组即可
+此查询方法针对的是只需要查出一行数据的需求，默认查询结果输出为string数组jieguo[]，如果想让其输出为josn需要将RETURNTYPE的参数变更为“Json”请
+一定要注意大小写区分kotlin写法RETURNTYPE="Json",java为ChasqlKt.setRETURNTYPE("Json");，调出查询结果时只需要chasql.jieguo[xxx]正常调出数组即可
 如果是java，那就需要调用chasql.INSTANCE.getJieguo();返回值一个string数组
 
 2.增加方法
@@ -63,3 +64,29 @@ kotlin写法gaisql.sqlgai("表名","要改的字段","改成什么")，java写�
 该方法还有一个只有一个string参数的，那个不建议用，如果需要改的字段很多那就多写几次这个方法，EXE_tiaojian[]和EXE_neirong[]这两个数组的东西
 不用每次都重写一遍，想清空里面的东西有一个方法待会说
 
+5.数组清空
+kotlin写法chasql.CSH(),java写法chasql.INSTANCE.CSH();
+该方法会将JS_zhi[]，jieguo[]，EXE_tiaojian[]，EXE_neirong[]，和查询出的josn数组一块清空，直接就没了，用之前请确保需要的内容已经存在别的变量
+里了，不然运行时一定会说“卧槽，怎么没了”
+
+其实以上方法已经可以适用于大部分场景了，但是在项目开发中往往会遇到一些很变态的需求，需要各种各样的奇怪sql语句，为了方便各位的开发需求
+接下来的内容就是为了应对各种场景，在原有基础上添加的扩展方法
+
+五.复杂sql应用（基本都是没有测试过的但应该不会有问题，有问题的话一定要跟我说，我来改）
+（1）自定义查询ChaDiy()，kotlin用法chasql.ChaDiy("自定义的sql语句"),java用法chasql.INSTANCE.ChaDiy("自定义的sql语句");
+这个方法什么数组都不用去写，EXE_tiaojian[]，EXE_neirong[]里面有的在你自定义的sql语句中就有了，JS_zhi[]的内容会帮你自动填进去，就是没有测试过
+同时默认结果存进json数组，想提出来一样是chasql.JsonArray和chasql.INSTANCE.getJsonArray()
+
+（2）自定义查询ChaOneDiy(),kotlin用法chasql.ChaOneDiy("自定义的sql语句"),java用法chasql.INSTANCE.ChaOneDiy("自定义的sql语句");
+和上面一个方法使用方式一样，但通常用于只查询一行数据的情况，默认存入jieguo[]，如果想让其输出为josn需要将RETURNTYPE的参数变更为“Json”这个和上面
+一样，只要参数变更查询到的参数救会输出到JsonArray
+
+（3）自定义更改gaiDIY()，kotlin用法gaisql.gaiDIY("自定义的sql语句"),java用法gaisql.INSTANCE.gaiDIY("自定义的sql语句");
+
+（4）自定义增加zengDIY()，kotlin用法zengsql.zengDIY("自定义的sql语句"),java用法zengsql.INSTANCE.zengDIY("自定义的sql语句");
+
+（5）自定义删除shanDIY(),kotlin用法shansql.shanDIY("自定义的sql语句"),java用法shansql.INSTANCE.shanDIY("自定义的sql语句");
+这几个没什么好介绍的，只要给sql语句就能干活
+
+（6）事务处理SWexe()，首先这个事务处理不能包含查询语句，另外使用事务处理之前需要提前准备好需要处理的sql语句，并将这些语句导入SW_sqls[]
+这个string数组，oksql里
