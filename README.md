@@ -47,4 +47,19 @@ JC_SQLEXEKt.setEXE_neirong(内容数组的数组名);JC_SQLEXEKt.setEXE_tiaojian
 此查询方法会将第三步用到的参数拼接进入sql语句中进行查询，查询结果存入josnarray，想要调出来的话kotlin是chasql.JsonArray，java是chasql.INSTANCE.getJsonArray()
 
 （2）kotlin的写法chasql.ChaOne("要查询的表名"),java是chasql.INSTANCE.ChaOne("要查询的表名");这个方法没有返回值
-此查询方法针对的是只需要查出一行数据的需求，默认查询结果输出为string数组jieguo[]
+此查询方法针对的是只需要查出一行数据的需求，默认查询结果输出为string数组jieguo[]，调出查询结果时只需要chasql.jieguo[xxx]正常调出数组即可
+如果是java，那就需要调用chasql.INSTANCE.getJieguo();返回值一个string数组
+
+2.增加方法
+kotlin写法zengsql.sqlzeng("表名")，java写法 zengsql.INSTANCE.sqlzeng("表名");这个方法执行完后会返回一个string类型的“1”
+该方法会将EXE_tiaojian[]和EXE_neirong[]这两个数组里的值添加到对应的表里面
+
+3.删除方法
+kotlin写法shansql.sqlshan("表名")，java写法shansql.INSTANCE.sqlshan("表名");这个方法执行完后会返回一个int类型的1
+该方法会按照EXE_tiaojian[]和EXE_neirong[]这两个数组里定义的条件删除对应的数据行
+
+4.更改方法
+kotlin写法gaisql.sqlgai("表名","要改的字段","改成什么")，java写法gaisql.INSTANCE.sqlgai("表名","要改的字段","改成什么");
+该方法还有一个只有一个string参数的，那个不建议用，如果需要改的字段很多那就多写几次这个方法，EXE_tiaojian[]和EXE_neirong[]这两个数组的东西
+不用每次都重写一遍，想清空里面的东西有一个方法待会说
+
