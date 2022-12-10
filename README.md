@@ -89,4 +89,16 @@ kotlin写法chasql.CSH(),java写法chasql.INSTANCE.CSH();
 这几个没什么好介绍的，只要给sql语句就能干活
 
 （6）事务处理SWexe()，首先这个事务处理不能包含查询语句，另外使用事务处理之前需要提前准备好需要处理的sql语句，并将这些语句导入SW_sqls[]
-这个string数组，oksql里
+这个string数组，上面说到oksql里有着EXE_tiaojian[]和EXE_neirong[]两个数组用于拼接sql语句，有的同志就要问了，那你怎么把拼接好的sql语句
+拿出来呢？其实在sql操作的各个类里面有一个内置的pingjie方法可以将拼接的sql语句输出，
+kotlin用法shansql.pingjie("表名")，zengsql.pingjie("表名")，gaisql.pingjie("表名","要改的字段","要改成什么")，
+Java用法为shansql.INSTANCE.pingjie("表名");，zengsql.INSTANCE.pingjie("表名");，gaisql.INSTANCE.pingjie("表名","要改的字段","要改成什么");
+，这些方法返回值为一个string字符串，查询的那个类也是有这样一个方法的，但是查询语句就算拿出来也没有什么用，就private了
+
+接下来将得到的sql语句添加到SW_sqls[]数组中，kotlin的写法SW_sqls[0]="xxx",java的话就要先创建一个string数组，然后先将sql语句添加进那个数组再
+JC_SQLEXEKt.setSW_sqls(刚刚新建的那个数组的名字);
+
+然后运行gaisql.SWexe(),应为这是一个写在父类的方法所以chasql.SWexe()也是可以的java的写法就是shansql.INSTANCE.SWexe();没有返回值
+
+gaisql的这个pingjie方法只有oksql的1.0.1版本有（因为写这段话的时候发现有点不太对劲，然后改了一下）
+
