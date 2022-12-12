@@ -102,3 +102,5 @@ JC_SQLEXEKt.setSW_sqls(刚刚新建的那个数组的名字);
 
 gaisql的这个pingjie方法只有oksql的1.0.1版本有（因为写这段话的时候发现有点不太对劲，然后改了一下）
 
+六.关闭数据库连接
+kotlin中可以直接调用SQL_message.close()关闭数据库链接，java的话是SQL_message.INSTANCE.close();没有返回值
